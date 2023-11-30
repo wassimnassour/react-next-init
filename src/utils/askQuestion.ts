@@ -2,12 +2,7 @@
 
 import inquirer from "inquirer"
 
-type AskAppQuestionType = {
-  appName: string
-  appType: string
-}
-
-export const askAppQuestions = (): AskAppQuestionType => {
+export const askAppQuestions = () => {
   const questions = [
     {
       type: "input",

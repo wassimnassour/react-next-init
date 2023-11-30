@@ -1,3 +1,3 @@
-const staticAnalysisCode = require("./staticAnalysisCode")
+import { config as staticAnalysisCodeConfig } from "./staticAnalysisCode/index.js"
 
-module.exports = [staticAnalysisCode]
+export const config = [staticAnalysisCodeConfig]

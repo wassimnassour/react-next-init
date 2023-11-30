@@ -1,4 +1,4 @@
-module.exports = {
+export const config = {
   name: "withLint",
   question:
     "Do you want to include static code analysis (TSLint, Prettier and StyleLint)?",

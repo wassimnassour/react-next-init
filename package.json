@@ -8,14 +8,21 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "test": "npm run build &&  node dist/index.js"
   },
   "devDependencies": {
+    "@types/inquirer": "^9.0.7",
     "@types/node": "^20.9.0",
+    "@types/shelljs": "^0.8.15",
     "fs-extra": "^11.1.1",
     "inquirer": "^9.2.12",
     "ora": "^7.0.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "shelljs": "^0.8.5"
   }
 }
