@@ -1,15 +1,16 @@
 {
-  "name": "ReactNextScalfold",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "reactnextscaffold",
+  "version": "1.0.1",
+  "main": "dist/index.js",
   "type": "module",
   "repository": "git@github.com:wassimnassour/ReactNextScalfold.git",
   "author": "<nassourwassim@gmail.com>",
   "license": "MIT",
+  "bin": "./dist/index.js",
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "test": "npm run build &&  node dist/index.js"
+    "publish": "npm run build &&  node dist/index.js"
   },
   "devDependencies": {
     "@types/inquirer": "^9.0.7",
@@ -18,7 +19,7 @@
     "fs-extra": "^11.1.1",
     "inquirer": "^9.2.12",
     "ora": "^7.0.1",
-    "ts-node": "^10.9.1",
+    "ts-node": "^10.9.2",
     "typescript": "^5.2.2"
   },
   "dependencies": {

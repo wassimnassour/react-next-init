@@ -1,10 +1,14 @@
-#!/usr/bin/env node
+#!/usr/bin/env ts-node
+
+// @ts-ignore
+import shell from "shelljs"
 import chalk from "chalk"
 import { askAppQuestions } from "./utils/askQuestion.js"
 import reactScript from "./scripts/generateReact.js"
 import nextScript from "./scripts/generateNext.js"
 
 async function run() {
+  // shell.exec("npm run install")
   const answers = await askAppQuestions()
 
   const { appName, appType } = answers

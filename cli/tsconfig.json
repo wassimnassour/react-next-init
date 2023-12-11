@@ -2,7 +2,7 @@
   "compilerOptions": {
     "moduleResolution": "Node",
     "target": "ES2020",
-    "sourceMap": true,
+    "sourceMap": false,
     "outDir": "dist"
   },
   "include": ["src/**/*.ts"],
