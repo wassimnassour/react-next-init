@@ -1,10 +1,77 @@
+#!/usr/bin/env node
+
 import inquirer from "inquirer"
 import ora from "ora"
 // @ts-ignore
-import shell from "shelljs"
 import { config } from "../config/index.js"
-import * as fs from "fs"
+import fs from "fs-extra"
+import nodeFs from "fs"
 import * as path from "path"
+import chalk from "chalk"
+import { runShellCommand } from "../utils/runShellCommand.js"
+
+export default async function create(appName, appDirectory) {
+  //   const selectedConfig = await askQuestions()
+  await createReactApp(appName)
+  // await installPackages(selectedConfig)
+  return true
+}
+
+async function createReactApp(appName) {
+  await initialProject(appName)
+  await cleanUpFolder(appName)
+}
+
+async function initialProject(appName) {
+  const spinner = ora("Creating your React App...").start()
+
+  const cloneStarter = `git clone --depth=1  https://github.com/wassimnassour/ReactNextScalfold.git  ${appName}`
+
+  try {
+    await runShellCommand(cloneStarter)
+    spinner.succeed()
+  } catch (error) {
+    spinner.fail(chalk.red(`Failed to execute ${command}`), error)
+    process.exit(1)
+  }
+}
+
+const cleanUpFolder = async (projectName) => {
+  const spinner = ora(`Clean and Setup project folder`).start()
+  const FILES_TO_REMOVE = [".git", "README.md", "cli", "templates/next"]
+  try {
+    // Remove unused Files
+    FILES_TO_REMOVE.forEach((file) => {
+      fs.removeSync(path.join(process.cwd(), `${projectName}/${file}`))
+    })
+
+    // Move each file/directory from template to the parent directory
+    const sourceFolder = path.join(
+      process.cwd(),
+      `${projectName}/templates/react`
+    )
+
+    const files = fs.readdirSync(sourceFolder)
+
+    for (var i = files.length - 1; i >= 0; i--) {
+      var file = files[i]
+      await fs.rename(
+        `${sourceFolder}/` + file,
+        `${process.cwd()}/${projectName}/` + file,
+        function (err) {
+          if (err) throw err
+          console.log("Move complete.")
+        }
+      )
+    }
+
+    spinner.succeed("Clean and Setup  project folder")
+  } catch (error) {
+    spinner.fail(error)
+    console.log(chalk.red(`Failed to clean up project folder`), error)
+    process.exit(1)
+  }
+}
 
 async function askQuestions() {
   const questions = config.map((question) => ({
@@ -16,56 +83,4 @@ async function askQuestions() {
   const answers = await inquirer.prompt(questions)
   const selectedAnswers = config.filter((qu) => answers[qu.name] === "Yes")
   return selectedAnswers
-}
-async function createReactApp(appName) {
-  const spinner = ora("Creating your React App...").start()
-  return new Promise((resolve, reject) => {
-    const cloneStarter = `git clone --depth=1  https://github.com/wassimnassour/ReactNextScalfold.git  ${appName}`
-    cleanFolders(appName)
-    shell.exec(cloneStarter, { silent: true }, (code, _, stderr) => {
-      // If command exit with error log the error
-      // if (code != 0) {
-      //   console.log(chalk.bgRed("Program stderr:", stderr, code))
-      // }
-      // const cdToProject = shell.cd(`${appName}`)
-      // if (cdToProject.code != 0) {
-      //   console.log(cdToProject.code, chalk.red(cdToProject?.stderr))
-      //   spinner.fail()
-      // }
-      spinner.succeed()
-      resolve()
-    })
-  })
-}
-function cleanFolders(appName) {
-  const pathDirectory = process.cwd()
-  const filesToKeep = [`templates/${appName}`]
-  console.log("appName", appName)
-  fs.readdir(pathDirectory, (err, files) => {
-    if (err) {
-      console.log(err)
-    }
-    files.forEach((file) => {
-      if (!filesToKeep.includes(file)) {
-        const filePathToRemove = path.join(pathDirectory, file)
-        console.log("filePathToRemove", file, filePathToRemove)
-        fs.unlink(filePathToRemove, () => {})
-        fs.rmdir(filePathToRemove, () => {})
-      }
-    })
-  })
-}
-// function installPackages(configList: dependenciesQuestion[]) {
-//   let dependencies = []
-//   let devDependencies = []
-//   configList.forEach((config) => {
-//     dependencies = [...dependencies, config.dependencies]
-//     devDependencies = [...devDependencies, config.devDependencies]
-//   })
-// }
-export default async function create(appName, appDirectory) {
-  const selectedConfig = await askQuestions()
-  await createReactApp(appName)
-  // await installPackages(selectedConfig)
-  return true
 }
