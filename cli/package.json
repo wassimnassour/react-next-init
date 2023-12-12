@@ -7,7 +7,7 @@
   "author": "<nassourwassim@gmail.com>",
   "license": "MIT",
   "bin": {
-    "reactnextscaffold": "./index.js"
+    "dddd": "./index.js"
   },
   "scripts": {
     "build": "tsc",
