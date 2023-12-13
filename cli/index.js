@@ -1,6 +1,9 @@
 #!/usr/bin/env ts-node
 import chalk from "chalk"
 import inquirer from "inquirer"
+import { updatePackageJson } from "./utils/updatePackageJson.js"
+import { initialProject } from "./utils/cloneTemplates.js"
+import { cleanUpFolder } from "./utils/cleanUpFolders.js"
 
 const questions = [
   {
@@ -35,10 +38,9 @@ async function run() {
   try {
     await initialProject(appName)
     await cleanUpFolder(appName, appType)
+    await updatePackageJson(appName)
   } catch (error) {
-    if (!error) {
-      console.log(chalk.red("Error while generating your App", error))
-    }
+    console.log(chalk.red("Error while generating your App", error))
   }
 
   return process.exit(0)
