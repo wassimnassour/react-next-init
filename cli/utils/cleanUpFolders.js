@@ -30,7 +30,7 @@ export const cleanUpFolder = async (projectName, appTemplate) => {
         `${process.cwd()}/${projectName}/` + file,
         function (err) {
           if (err) throw err
-          console.log("Move complete.")
+          return true
         }
       )
     }
