@@ -3,6 +3,11 @@ import chalk from "chalk"
 
 import { runShellCommand } from "./runShellCommand.js"
 
+/**
+ * function to clone the project
+ * @param  {string}  appName   - this is app name , used to initialize the project
+ */
+
 export async function initialProject(appName) {
   const spinner = ora("Creating your React App...").start()
 

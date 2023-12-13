@@ -5,6 +5,12 @@ import fs from "fs-extra"
 import * as path from "path"
 const FILES_TO_REMOVE = [".git", "README.md", "cli"]
 
+/**
+ * after cloning the project , we need to remove all unwanted files from the repo
+ * @param  {string}  projectName   - this is app name , used to initialize the project
+ * @param  {"react"|"next"}  appTemplate  - this app type React or Nextjs
+ */
+
 export const cleanUpFolder = async (projectName, appTemplate) => {
   const spinner = ora(`Clean and Setup project folder`).start()
   try {
