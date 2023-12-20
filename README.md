@@ -1,6 +1,6 @@
 
 
-#  ReactNextScalfold is  Next.js and React App Generator CLI
+#  react-next-init is  Next.js and React App Generator CLI
 
 This Node.js Command Line Interface (CLI) tool allows you to quickly scaffold Next.js and React applications with minimal setup. It streamlines the process of creating new projects, enabling developers to focus on building outstanding web applications.
 
@@ -15,16 +15,20 @@ To use this CLI tool, Node.js and npm (or yarn) must be installed on your machin
 
 using Npm
 ```bash
-npm install reactnextscaffold -g
+npm i react-next-init -g
 ```
 
 using yarn
 ```bash
-yarn add reactnextscaffold -g
+yarn add react-next-init -g
 ```
 ## Usage
 
 ```bash
-yarn reactnextscaffold
-// or
+// write the package name in your terminal directly
+react-next-init
+
+// with yarn 
+yarn react-next-init
+// or with npm
 npx reactnextscaffold
