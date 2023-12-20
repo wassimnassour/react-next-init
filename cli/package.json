@@ -1,13 +1,13 @@
 {
-  "name": "reactnextscaffold",
-  "version": "1.0.9",
+  "name": "react-next-init",
+  "version": "1.0.0",
   "main": "index.js",
   "type": "module",
   "repository": "git@github.com:wassimnassour/ReactNextScalfold.git",
   "author": "<nassourwassim@gmail.com>",
   "license": "MIT",
   "bin": {
-    "dddd": "./index.js"
+    "react-next-init": "./index.js"
   },
   "scripts": {
     "build": "tsc",
